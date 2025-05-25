@@ -8,14 +8,19 @@ import SwiftUI
 import Observation
 
 struct Keyboard: View  {
+    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
     var body: some View {
         Grid {
             if UIDevice.current.userInterfaceIdiom == .phone {
-                KeyboardTemp(defaultVal: 85, zeroVal: 180, bottomPadding: -15)
+                if verticalSizeClass == .compact {
+                    KeyboardTemp(defaultWid: 60, defaultHei: 60, zeroVal: 125, bottomPadding: 0)
+                } else {
+                    KeyboardTemp(defaultWid: 85, defaultHei: 85, zeroVal: 180, bottomPadding: -15)
+                }
             }
             
             if UIDevice.current.userInterfaceIdiom == .pad {
-                KeyboardTemp(defaultVal: 185, zeroVal: 378, bottomPadding: -5)
+                KeyboardTemp(defaultWid: 185, defaultHei: 85, zeroVal: 378, bottomPadding: -5)
             }
         }
     }
@@ -23,7 +28,10 @@ struct Keyboard: View  {
 
 struct KeyboardTemp: View {
     @Environment(Calculate.self) var myCalculation
-    var defaultVal: CGFloat
+    @Environment(\.modelContext) private var modelContext
+    
+    var defaultWid: CGFloat
+    var defaultHei: CGFloat
     var zeroVal: CGFloat
     var bottomPadding: CGFloat
 
@@ -31,14 +39,20 @@ struct KeyboardTemp: View {
         GridRow {
             HStack {
                 Button {
-                    if myCalculation.opExists && !myCalculation.op2Exists {
+                    if myCalculation.finishedOp {
+                        myCalculation.finishedOp = false
                         myCalculation.reset()
-                    }
-                    else {
-                        if myCalculation.opExists {
-                            myCalculation.resetOp1()
-                        } else {
-                            myCalculation.resetOp2()
+                    } else {
+                        if myCalculation.opExists && !myCalculation.op2Exists {
+                            myCalculation.reset()
+                        }
+                        else {
+                        
+                            if myCalculation.opExists {
+                                myCalculation.resetOp1()
+                            } else {
+                                myCalculation.resetOp2()
+                            }
                         }
                     }
                 } label: {
@@ -46,7 +60,7 @@ struct KeyboardTemp: View {
                         if myCalculation.opExists && !myCalculation.op2Exists {
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(Color.red)
-                                .frame(width: defaultVal, height: 85)
+                                .frame(width: defaultWid, height: defaultHei)
                                 .transition(.opacity)
                             Text("AC")
                                 .foregroundStyle(.black)
@@ -55,7 +69,7 @@ struct KeyboardTemp: View {
                                 .transition(.opacity)
                         } else {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .frame(width: defaultVal, height: 85)
+                                    .frame(width: defaultWid, height: defaultHei)
                                     .transition(.opacity)
                                 Text("C")
                                     .foregroundStyle(.black)
@@ -74,7 +88,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("+/-")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -88,7 +102,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("%")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -104,7 +118,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).fill(Color.red)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("/")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -124,7 +138,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("7")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -138,7 +152,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("8")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -152,7 +166,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("9")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -168,7 +182,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).fill(Color.red)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("x")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -188,7 +202,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("4")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -202,7 +216,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("5")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -216,7 +230,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("6")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -232,7 +246,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).fill(Color.red)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("-")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -252,7 +266,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("1")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -266,7 +280,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("2")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -280,7 +294,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("3")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -296,7 +310,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).fill(Color.red)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                         Text("+")
                             .foregroundStyle(.black)
                             .fontWeight(.semibold)
@@ -317,7 +331,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         Rectangle()
-                            .frame(width: zeroVal, height: 85)
+                            .frame(width: zeroVal, height: defaultHei)
                             .cornerRadius(35, corners: [.bottomLeft])
                             .cornerRadius(10, corners: [.bottomRight])
                             .cornerRadius(10, corners: [.topLeft, .topRight])
@@ -335,7 +349,7 @@ struct KeyboardTemp: View {
                 } label: {
                     ZStack {
                         Rectangle()
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                             .cornerRadius(10, corners: [.allCorners])
                 
                         Text(".")
@@ -346,10 +360,15 @@ struct KeyboardTemp: View {
                 }
                 Spacer()
                     .frame(width: 15)
-                Button { } label: {
+                Button {
+                    let myStr = "\(myCalculation.operand1 ?? 0) \(myCalculation.operation) \(myCalculation.operand2 ?? 0)"
+                    let newCalc = Calculation(operation: myStr, result: myCalculation.result)
+                    myCalculation.finishedOp = true; myCalculation.lastCalculation = myStr
+                    modelContext.insert(newCalc)
+                } label: {
                     ZStack {
                         Rectangle().fill(Color.red)
-                            .frame(width: defaultVal, height: 85)
+                            .frame(width: defaultWid, height: defaultHei)
                             .cornerRadius(35, corners: [.bottomRight])
                             .cornerRadius(10, corners: [.bottomLeft])
                             .cornerRadius(10, corners: [.topLeft, .topRight])

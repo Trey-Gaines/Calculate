@@ -15,24 +15,29 @@ struct PreviousCalculations: View {
     @Query private var calculations: [Calculation]
     
     var body: some View {
-        Text("Yes")
+        List {
+            ForEach(calculations) { calculation in
+                VStack {
+                    HStack(alignment: .center) {
+                        Text("\(calculation.operation) = \(String(format: "%.2f", calculation.result))")
+                            .fontWeight(.semibold)
+                            .font(.title3)
+                    }
+                    
+                    HStack(alignment: .center) {
+                        Text("\(calculation.timestamp)")
+                    }
+                }
+                    
+            }
+            .onDelete { offset in
+                for index in offset {
+                    modelContext.delete(calculations[index])
+                }
+            }
+        }
     }
 }
-//    private func addItem() {
-//        withAnimation {
-//            let newItem = Item(timestamp: Date())
-//            modelContext.insert(newItem)
-//        }
-//    }
-//
-//    private func deleteItems(offsets: IndexSet) {
-//        withAnimation {
-//            for index in offsets {
-//                modelContext.delete(items[index])
-//            }
-//        }
-//    }
-//}
 
 
 

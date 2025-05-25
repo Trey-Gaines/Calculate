@@ -9,39 +9,53 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-
+    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+    
     var body: some View {
         NavigationStack {
-            Spacer()
-            Grid {
-                TopCalculations()
-                Keyboard()
+            VStack {
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    VStack {
+                        TopCalculations()
+                        Keyboard()
+                    }
+                    .background(Color(uiColor: UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)), ignoresSafeAreaEdges: .all)
+                }
+                
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    if horizontalSizeClass == .compact && verticalSizeClass == .regular {
+                        //Portrait
+                        VStack {
+                            TopCalculations()
+                            Keyboard()
+                        }
+                    }
+                    else if verticalSizeClass == .compact {
+                        //Landscape
+                        HStack {
+                            TopCalculations()
+                                .frame(width: 330, height: 330)
+                            Keyboard()
+                        }
+                        
+                    }
+                }
             }
+            
             
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        print("Yes")
+                    NavigationLink {
+                        PreviousCalculations()
                     } label: {
                         Image(systemName: "list.bullet")
                             .foregroundStyle(.blue)
                             .font(.headline)
                     }
-                    .padding(.all, 0)
-                }
-                
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        print("Yes")
-                    } label: {
-                        Image(systemName: "gear")
-                            .foregroundStyle(.blue)
-                            .font(.headline)
-                    }
-                    .padding(.all, 0)
                 }
             }
-        } //.background(Color.black)
+        }
     }
 }
 

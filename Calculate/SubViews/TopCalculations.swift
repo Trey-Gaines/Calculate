@@ -13,24 +13,24 @@ struct TopCalculations: View  {
     @Environment(Calculate.self) var curr
     var body: some View {
         ZStack {
-            Rectangle().fill(Color(uiColor: UIColor(red: 225/255, green: 224/255, blue: 221/255, alpha: 1)))
+            Rectangle().fill(Color(uiColor: UIColor(red: 187/255, green: 187/255, blue: 187/255, alpha: 1)))
                 .cornerRadius(10, corners: .allCorners)
+            
             VStack {
-                Text("\(String(describing: curr.operand1))")
-                Text("\(String(describing: curr.operand2))")
-                Text("\(curr.operand1Str == "" ? "No 1st" : curr.operand1Str)")
-                Text("\(curr.operand2Str == "" ? "No 2nd" : curr.operand2Str)")
-                Text("\(curr.operation == "" ? "No op" : curr.operation)")
-                Text("")
-                if curr.resultPossible {
-                    Text("\(String(describing: curr.operand1)) \(curr.operation) \(String(describing: curr.operand2)) = \(curr.result)")
-                } else if curr.op1Exists {
-                    Text("\(String(describing: curr.operand1)) \(curr.operation) \(curr.operand2Str)")
-                } else {
-                    if curr.operand1Str != "" {
-                        Text("\(curr.operand1Str)")
-                    } else { Text("0") }
+                HStack {
+                    if curr.lastCalculation != "" {
+                        Spacer(); Text(curr.lastCalculation).fontWeight(.semibold).padding()
+                    } else {
+                        Spacer(); Text("Make a calculation").fontWeight(.semibold).padding()
+                    }
                 }
+                HStack { Spacer() }
+                Text("\(curr.currentCalculation)")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                Spacer()
             }
         }
             

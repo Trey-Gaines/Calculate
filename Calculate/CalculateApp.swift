@@ -10,9 +10,10 @@ import SwiftData
 
 @main
 struct CalculateApp: App {
+    @State private var calculate = Calculate()
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Calculation.self,
+            Calculation.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -26,7 +27,7 @@ struct CalculateApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .background(Color.black)
+                .environment(calculate)
         }
         .modelContainer(sharedModelContainer)
     }

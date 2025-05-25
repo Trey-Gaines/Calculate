@@ -28,7 +28,8 @@ class Calculate {
     
     //Operation
     var operation: String = ""
-    
+    var finishedOp: Bool = false
+    var lastCalculation: String = ""
     
     var op1Exists: Bool {
         operand1 != nil
@@ -43,6 +44,20 @@ class Calculate {
     }
     
     var resultPossible : Bool { op1Exists && op2Exists && opExists }
+    
+    var currentCalculation: String {
+        if resultPossible && finishedOp {
+            return "\(operand1!) \(operation) \(operand2!) = \(result)"
+        } else if op2Exists {
+            return "\(operand1!) \(operation) \(operand2Str)"
+        } else if opExists {
+            return "\(operand1!) \(operation)"
+        } else if op1Exists {
+            return "\(operand1Str)"
+        } else { return "" }
+    }
+    
+    
     
     
     
@@ -71,10 +86,11 @@ class Calculate {
     }
     
     func reset() {
+        operand1Str = ""
+        operand2Str = ""
         operation = ""
         operand1Str = ""
         operand1IsNegative = false
-        operand2Str = ""
         operand2IsNegative = false
     }
 }
