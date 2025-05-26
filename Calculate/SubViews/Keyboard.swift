@@ -9,6 +9,7 @@ import Observation
 
 struct Keyboard: View  {
     @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
+    
     var body: some View {
         Grid {
             if UIDevice.current.userInterfaceIdiom == .phone {
@@ -34,6 +35,8 @@ struct KeyboardTemp: View {
     var defaultHei: CGFloat
     var zeroVal: CGFloat
     var bottomPadding: CGFloat
+    
+    var new: Bool { myCalculation.finishedOp }
 
     var body: some View {
         GridRow {
@@ -80,11 +83,13 @@ struct KeyboardTemp: View {
                     }
                 }
                 Button {
-                    if !myCalculation.opExists {
-                        myCalculation.operand1IsNegative.toggle()
-                    } else {
-                        myCalculation.operand2IsNegative.toggle()
-                    }
+                    if !new {
+                        if !myCalculation.opExists {
+                            myCalculation.operand1IsNegative.toggle()
+                        } else {
+                            myCalculation.operand2IsNegative.toggle()
+                        }
+                    } else { }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -96,7 +101,14 @@ struct KeyboardTemp: View {
                     }
                 }
                 Button {
-                    if !myCalculation.op2Exists {
+                    if !new {
+                        if !myCalculation.op2Exists {
+                            myCalculation.operation = "%"
+                        }
+                    } else {
+                        let lastAns = myCalculation.result
+                        myCalculation.reset()
+                        myCalculation.operand1Str = String(lastAns)
                         myCalculation.operation = "%"
                     }
                 } label: {
@@ -112,7 +124,14 @@ struct KeyboardTemp: View {
                 Spacer()
                     .frame(width: 15)
                 Button {
-                    if !myCalculation.op2Exists {
+                    if !new {
+                        if !myCalculation.op2Exists {
+                            myCalculation.operation = "/"
+                        }
+                    } else {
+                        let lastAns = myCalculation.result
+                        myCalculation.reset()
+                        myCalculation.operand1Str = String(lastAns)
                         myCalculation.operation = "/"
                     }
                 } label: {
@@ -176,7 +195,14 @@ struct KeyboardTemp: View {
                 Spacer()
                     .frame(width: 15)
                 Button {
-                    if !myCalculation.op2Exists {
+                    if !new {
+                        if !myCalculation.op2Exists {
+                            myCalculation.operation = "x"
+                        }
+                    } else {
+                        let lastAns = myCalculation.result
+                        myCalculation.reset()
+                        myCalculation.operand1Str = String(lastAns)
                         myCalculation.operation = "x"
                     }
                 } label: {
@@ -240,7 +266,14 @@ struct KeyboardTemp: View {
                 Spacer()
                     .frame(width: 15)
                 Button {
-                    if !myCalculation.op2Exists {
+                    if !new {
+                        if !myCalculation.op2Exists {
+                            myCalculation.operation = "-"
+                        }
+                    } else {
+                        let lastAns = myCalculation.result
+                        myCalculation.reset()
+                        myCalculation.operand1Str = String(lastAns)
                         myCalculation.operation = "-"
                     }
                 } label: {
@@ -304,7 +337,14 @@ struct KeyboardTemp: View {
                 Spacer()
                     .frame(width: 15)
                 Button {
-                    if !myCalculation.op2Exists {
+                    if !new {
+                        if !myCalculation.op2Exists {
+                            myCalculation.operation = "+"
+                        }
+                    } else {
+                        let lastAns = myCalculation.result
+                        myCalculation.reset()
+                        myCalculation.operand1Str = String(lastAns)
                         myCalculation.operation = "+"
                     }
                 } label: {
