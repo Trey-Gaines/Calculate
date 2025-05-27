@@ -22,8 +22,7 @@ final class Calculation {
         
         
         let dateFormatter = DateFormatter()
-        DateFormatter().dateFormat = "MMM dd, yyyy"
+        dateFormatter.dateStyle = .medium
         self.time = dateFormatter.string(from: timestamp)
-        
     }
 }

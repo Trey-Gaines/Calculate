@@ -108,6 +108,7 @@ struct KeyboardTemp: View {
                     } else {
                         let lastAns = myCalculation.result
                         myCalculation.reset()
+                        myCalculation.finishedOp.toggle()
                         myCalculation.operand1Str = String(lastAns)
                         myCalculation.operation = "%"
                     }
@@ -131,6 +132,7 @@ struct KeyboardTemp: View {
                     } else {
                         let lastAns = myCalculation.result
                         myCalculation.reset()
+                        myCalculation.finishedOp.toggle()
                         myCalculation.operand1Str = String(lastAns)
                         myCalculation.operation = "/"
                     }
@@ -151,9 +153,11 @@ struct KeyboardTemp: View {
         GridRow {
             HStack {
                 Button {
-                    if myCalculation.opExists {
-                        myCalculation.operand2Str += "7"
-                    } else { myCalculation.operand1Str += "7" }
+                    if !new {
+                        if myCalculation.opExists {
+                            myCalculation.operand2Str += "7"
+                        } else { myCalculation.operand1Str += "7" }
+                    }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -165,9 +169,11 @@ struct KeyboardTemp: View {
                     }
                 }
                 Button {
-                    if myCalculation.opExists {
-                        myCalculation.operand2Str += "8"
-                    } else { myCalculation.operand1Str += "8" }
+                    if !new {
+                        if myCalculation.opExists {
+                            myCalculation.operand2Str += "8"
+                        } else { myCalculation.operand1Str += "8" }
+                    }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -179,9 +185,11 @@ struct KeyboardTemp: View {
                     }
                 }
                 Button {
-                    if myCalculation.opExists {
-                        myCalculation.operand2Str += "9"
-                    } else { myCalculation.operand1Str += "9" }
+                    if !new {
+                        if myCalculation.opExists {
+                            myCalculation.operand2Str += "9"
+                        } else { myCalculation.operand1Str += "9" }
+                    }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -202,6 +210,7 @@ struct KeyboardTemp: View {
                     } else {
                         let lastAns = myCalculation.result
                         myCalculation.reset()
+                        myCalculation.finishedOp.toggle()
                         myCalculation.operand1Str = String(lastAns)
                         myCalculation.operation = "x"
                     }
@@ -222,9 +231,11 @@ struct KeyboardTemp: View {
         GridRow {
             HStack {
                 Button {
-                    if myCalculation.opExists {
-                        myCalculation.operand2Str += "4"
-                    } else { myCalculation.operand1Str += "4" }
+                    if !new {
+                        if myCalculation.opExists {
+                            myCalculation.operand2Str += "4"
+                        } else { myCalculation.operand1Str += "4" }
+                    }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -236,9 +247,11 @@ struct KeyboardTemp: View {
                     }
                 }
                 Button {
-                    if myCalculation.opExists {
-                        myCalculation.operand2Str += "5"
-                    } else { myCalculation.operand1Str += "5" }
+                    if !new {
+                        if myCalculation.opExists {
+                            myCalculation.operand2Str += "5"
+                        } else { myCalculation.operand1Str += "5" }
+                    }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -250,9 +263,11 @@ struct KeyboardTemp: View {
                     }
                 }
                 Button {
-                    if myCalculation.opExists {
-                        myCalculation.operand2Str += "6"
-                    } else { myCalculation.operand1Str += "6" }
+                    if !new {
+                        if myCalculation.opExists {
+                            myCalculation.operand2Str += "6"
+                        } else { myCalculation.operand1Str += "6" }
+                    }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -273,6 +288,7 @@ struct KeyboardTemp: View {
                     } else {
                         let lastAns = myCalculation.result
                         myCalculation.reset()
+                        myCalculation.finishedOp.toggle()
                         myCalculation.operand1Str = String(lastAns)
                         myCalculation.operation = "-"
                     }
@@ -293,9 +309,11 @@ struct KeyboardTemp: View {
         GridRow {
             HStack {
                 Button {
-                    if myCalculation.opExists {
-                        myCalculation.operand2Str += "1"
-                    } else { myCalculation.operand1Str += "1" }
+                    if !new {
+                        if myCalculation.opExists {
+                            myCalculation.operand2Str += "1"
+                        } else { myCalculation.operand1Str += "1" }
+                    }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -307,9 +325,11 @@ struct KeyboardTemp: View {
                     }
                 }
                 Button {
-                    if myCalculation.opExists {
-                        myCalculation.operand2Str += "2"
-                    } else { myCalculation.operand1Str += "2" }
+                    if !new {
+                        if myCalculation.opExists {
+                            myCalculation.operand2Str += "2"
+                        } else { myCalculation.operand1Str += "2" }
+                    }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -321,9 +341,11 @@ struct KeyboardTemp: View {
                     }
                 }
                 Button {
-                    if myCalculation.opExists {
-                        myCalculation.operand2Str += "3"
-                    } else { myCalculation.operand1Str += "3" }
+                    if !new {
+                        if myCalculation.opExists {
+                            myCalculation.operand2Str += "3"
+                        } else { myCalculation.operand1Str += "3" }
+                    }
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -344,6 +366,7 @@ struct KeyboardTemp: View {
                     } else {
                         let lastAns = myCalculation.result
                         myCalculation.reset()
+                        myCalculation.finishedOp.toggle()
                         myCalculation.operand1Str = String(lastAns)
                         myCalculation.operation = "+"
                     }
@@ -365,9 +388,11 @@ struct KeyboardTemp: View {
         GridRow {
             HStack {
                 Button {
-                    if myCalculation.opExists {
-                        myCalculation.operand2Str += "0"
-                    } else { myCalculation.operand1Str += "0" }
+                    if !new {
+                        if myCalculation.opExists {
+                            myCalculation.operand2Str += "0"
+                        } else { myCalculation.operand1Str += "0" }
+                    }
                 } label: {
                     ZStack {
                         Rectangle()
@@ -383,9 +408,11 @@ struct KeyboardTemp: View {
                 }
                 
                 Button {
-                    if myCalculation.opExists {
-                        myCalculation.operand2Str += "."
-                    } else { myCalculation.operand1Str += "." }
+                    if !new {
+                        if myCalculation.opExists {
+                            myCalculation.operand2Str += "."
+                        } else { myCalculation.operand1Str += "." }
+                    }
                 } label: {
                     ZStack {
                         Rectangle()
@@ -403,7 +430,7 @@ struct KeyboardTemp: View {
                 Button {
                     let myStr = "\(myCalculation.operand1 ?? 0) \(myCalculation.operation) \(myCalculation.operand2 ?? 0)"
                     let newCalc = Calculation(operation: myStr, result: myCalculation.result)
-                    myCalculation.finishedOp = true; myCalculation.lastCalculation = myStr
+                    myCalculation.finishedOp = true; myCalculation.lastCalculation = "\(myStr) = \(myCalculation.result)"
                     modelContext.insert(newCalc)
                 } label: {
                     ZStack {
