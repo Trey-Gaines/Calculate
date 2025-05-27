@@ -20,7 +20,7 @@ struct ContentView: View {
                         TopCalculations()
                         Keyboard()
                     }
-                    .background(Color(uiColor: UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)), ignoresSafeAreaEdges: .all)
+                    //.background(Color(uiColor: UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)), ignoresSafeAreaEdges: .all)
                 }
                 
                 if UIDevice.current.userInterfaceIdiom == .phone {
@@ -42,7 +42,6 @@ struct ContentView: View {
                     }
                 }
             }
-            
             
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

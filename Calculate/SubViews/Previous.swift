@@ -17,22 +17,15 @@ struct PreviousCalculations: View {
     var body: some View {
         List {
             ForEach(calculations) { calculation in
-                VStack(spacing: 5) {
-                    HStack {
-                        Spacer()
-                        Text("\(calculation.operation) = \(String(format: "%.2f", calculation.result))")
-                            .fontWeight(.bold)
-                            .font(.title)
-                            .multilineTextAlignment(.center)
-                        Spacer()
-                    }
-                    
-                    HStack(alignment: .firstTextBaseline) {
-                        Text("\(calculation.time)")
-                            .fontWeight(.semibold)
-                    }
+                VStack(alignment: .center, spacing: 5) {
+                    Text("\(calculation.operation) = \(String(format: "%.2f", calculation.result))")
+                        .fontWeight(.bold)
+                        .font(.title)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    Text("\(calculation.time)")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
-                    
             }
             .onDelete { offset in
                 for index in offset {
@@ -44,6 +37,13 @@ struct PreviousCalculations: View {
 }
 
 
+struct listItem: View {
+    var calculation: Calculation
+    
+    var body: some View {
+        
+    }
+}
 
 
 #Preview {

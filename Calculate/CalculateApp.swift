@@ -28,6 +28,7 @@ struct CalculateApp: App {
         WindowGroup {
             ContentView()
                 .environment(calculate)
+                .preferredColorScheme(UIDevice.current.userInterfaceIdiom == .pad ? .dark : .light)
         }
         .modelContainer(sharedModelContainer)
     }
