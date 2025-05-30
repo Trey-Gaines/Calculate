@@ -37,15 +37,6 @@ struct PreviousCalculations: View {
 }
 
 
-struct listItem: View {
-    var calculation: Calculation
-    
-    var body: some View {
-        
-    }
-}
-
-
 #Preview {
     PreviousCalculations()
 }

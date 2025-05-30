@@ -57,10 +57,6 @@ class Calculate {
         } else { return "" }
     }
     
-    
-    
-    
-    
     var result: Double {
         var ans: Double = 0.0
         if let operand1 = operand1, let operand2 = operand2 {

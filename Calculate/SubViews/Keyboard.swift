@@ -21,7 +21,7 @@ struct Keyboard: View  {
             }
             
             if UIDevice.current.userInterfaceIdiom == .pad {
-                KeyboardTemp(defaultWid: 185, defaultHei: 85, zeroVal: 378, bottomPadding: -5)
+                KeyboardTemp(defaultWid: 165, defaultHei: 85, zeroVal: 340, bottomPadding: -5)
             }
         }
     }
@@ -451,8 +451,6 @@ struct KeyboardTemp: View {
         .padding(.bottom, bottomPadding)
     }
 }
-
-
 
 
 struct RoundedCorner: Shape {
